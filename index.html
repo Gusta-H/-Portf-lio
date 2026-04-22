@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gustavo Henrique — Portfólio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #16161f;
+    --surface: #1c1c27;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #f0eff8;
+    --muted: #7e7d9a;
+    --accent: #6c63ff;
+    --accent2: #00e5b0;
+    --accent3: #ff6584;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 7rem 2.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,176,0.07) 0%, transparent 70%);
+    bottom: 0; left: -100px;
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(108,99,255,0.12);
+    border: 1px solid rgba(108,99,255,0.25);
+    color: #a09eff;
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent2);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    margin-top: 1.2rem;
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 520px;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #5a52e8; transform: translateY(-1px); }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text);
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid var(--border-hover);
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-1px); }
+  .tech-stack {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .tech-pill {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 5rem 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2.5rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 200px;
+  }
+
+  /* ── ABOUT GRID ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .about-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.2rem 1.4rem;
+    transition: border-color 0.2s;
+  }
+  .about-card:hover { border-color: var(--border-hover); }
+  .about-card .lbl {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .about-card p {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .about-card .sub {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .about-card.wide { grid-column: span 2; }
+
+  /* LANGUAGES */
+  .lang-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .lang-item {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 18px;
+    text-align: center;
+  }
+  .lang-item .lang-name { font-size: 0.9rem; font-weight: 600; }
+  .lang-item .lang-level { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-hover);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .project-thumb {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, var(--surface) 100%);
+  }
+  .project-body { padding: 1rem 1.2rem 1.4rem; }
+  .semester-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent2);
+    margin-bottom: 6px;
+  }
+  .project-body h3 {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .project-body p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 6px;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .project-footer {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .tech-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .tech-tag {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 100px;
+    color: var(--muted);
+  }
+  .project-link {
+    font-size: 0.75rem;
+    color: var(--accent);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5,5,10,0.88);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--bg2);
+    border: 1px solid var(--border-hover);
+    border-radius: 20px;
+    max-width: 640px;
+    width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    animation: modalIn 0.25s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.96) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-header {
+    padding: 1.5rem 1.8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-close {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 8px;
+    width: 32px; height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+    flex-shrink: 0;
+  }
+  .modal-close:hover { color: var(--text); }
+  .modal-body { padding: 1.5rem 1.8rem 2rem; }
+  .modal-body .desc-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .modal-section-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin: 1.2rem 0 0.6rem;
+  }
+  .modal-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent2);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border: 1px solid rgba(0,229,176,0.2);
+    background: rgba(0,229,176,0.06);
+    padding: 7px 14px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .modal-link:hover { background: rgba(0,229,176,0.12); }
+  .participation-box {
+    background: rgba(108,99,255,0.07);
+    border: 1px solid rgba(108,99,255,0.2);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    font-size: 0.85rem;
+    color: #a09eff;
+    line-height: 1.6;
+  }
+
+  /* ── EXPERIENCE ── */
+  .experience-item {
+    display: flex;
+    gap: 1.2rem;
+    position: relative;
+    padding-bottom: 2rem;
+  }
+  .experience-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .exp-dot {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.7rem;
+    color: #fff;
+    flex-shrink: 0;
+    letter-spacing: -0.02em;
+  }
+  .exp-dot.current { background: var(--accent2); color: var(--bg); }
+  .exp-content { padding-top: 8px; }
+  .exp-content h3 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .current-badge {
+    background: rgba(0,229,176,0.12);
+    color: var(--accent2);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 100px;
+    border: 1px solid rgba(0,229,176,0.25);
+    font-weight: 600;
+    font-family: var(--font-body);
+  }
+  .exp-company { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+  .exp-desc { font-size: 0.83rem; color: var(--muted); margin-top: 8px; line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  footer .footer-name {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  footer .footer-sub {
+    font-size: 0.78rem;
+    color: rgba(126,125,154,0.6);
+    margin-top: 4px;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface); border-radius: 3px; }
+
+  @media (max-width: 640px) {
+    nav ul { display: none; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    section { padding: 3.5rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-card.wide { grid-column: span 1; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>G</span>ustavo</a>
+  <ul>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li><a href="#experiencia">Experiência</a></li>
+    <li><a href="https://github.com/Gusta-H" target="_blank">GitHub ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Disponível para oportunidades</div>
+    <h1>Gustavo Henrique<br/><em>Santana dos Santos</em></h1>
+    <p class="hero-sub">Estudante de Desenvolvimento de Software Multiplataforma na Fatec Itaquera. CRM na ScanSource.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://github.com/Gusta-H" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+      <a class="btn-ghost" href="#projetos">Ver projetos ↓</a>
+    </div>
+    <div class="tech-stack">
+      <span class="tech-pill">Java</span>
+      <span class="tech-pill">JavaScript</span>
+      <span class="tech-pill">Python</span>
+      <span class="tech-pill">SQL</span>
+      <span class="tech-pill">React</span>
+      <span class="tech-pill">Node.js</span>
+    </div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-label">Sobre</div>
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="lbl">Instituição</div>
+      <p>Fatec Itaquera</p>
+      <div class="sub">Centro Paula Souza — São Paulo, SP</div>
+    </div>
+    <div class="about-card">
+      <div class="lbl">Curso</div>
+      <p>Desenvolvimento de Software Multiplataforma</p>
+      <div class="sub">Ago/2023 · Conclusão prevista Jul/2026</div>
+    </div>
+    <div class="about-card wide">
+      <div class="lbl">Idiomas</div>
+      <div class="lang-row" style="margin-top:6px;">
+        <div class="lang-item">
+          <div class="lang-name">Português</div>
+          <div class="lang-level">Nativo</div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">Inglês</div>
+          <div class="lang-level">Intermediário — B1</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETOS -->
+<section id="projetos">
+  <div class="section-label">Projetos por semestre</div>
+  <div class="projects-grid">
+
+    <a class="project-card" href="#" onclick="openModal('p1'); return false;">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#0d3b2e,#1a5c44);">🌿</div>
+      <div class="project-body">
+        <div class="semester-tag">1º Semestre · UX/UI</div>
+        <h3>Greenpeace</h3>
+        <p>Protótipo de site institucional para ONG com foco em sustentabilidade e educação ambiental.</p>
+        <div class="project-footer">
+          <div class="tech-tags">
+            <span class="tech-tag">Figma</span>
+            <span class="tech-tag">UX/UI</span>
+          </div>
+          <span class="project-link">Ver mais →</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-card" href="#" onclick="openModal('p2'); return false;">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#1a1a5c,#2d2db0);">📚</div>
+      <div class="project-body">
+        <div class="semester-tag">2º Semestre · Front-end</div>
+        <h3>BookRoom</h3>
+        <p>Sistema web para reserva de salas acadêmicas, otimizando o agendamento por professores.</p>
+        <div class="project-footer">
+          <div class="tech-tags">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JS</span>
+            <span class="tech-tag">Bootstrap</span>
+          </div>
+          <span class="project-link">Ver mais →</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-card" href="#" onclick="openModal('p3'); return false;">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#3b1a5c,#6b2fa0);">⛪</div>
+      <div class="project-body">
+        <div class="semester-tag">3º Semestre · Full Stack</div>
+        <h3>SRP</h3>
+        <p>Sistema web completo para gestão de viagens paroquiais, com controle de ônibus e reservas.</p>
+        <div class="project-footer">
+          <div class="tech-tags">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Spring Boot</span>
+            <span class="tech-tag">MongoDB</span>
+          </div>
+          <span class="project-link">Ver mais →</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-card" href="#" onclick="openModal('p4'); return false;">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#5c2200,#a03d00);">👕</div>
+      <div class="project-body">
+        <div class="semester-tag">4º Semestre · E-commerce</div>
+        <h3>VivaTShirt</h3>
+        <p>E-commerce para gestão de pedidos integrado à API da Shopee, substituindo operações via Instagram.</p>
+        <div class="project-footer">
+          <div class="tech-tags">
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Tailwind</span>
+            <span class="tech-tag">MySQL</span>
+          </div>
+          <span class="project-link">Ver mais →</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-card" href="#" onclick="openModal('p5'); return false;">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#003d5c,#006b99);">🦺</div>
+      <div class="project-body">
+        <div class="semester-tag">5º Semestre · Mobile</div>
+        <h3>TAFE</h3>
+        <p>App mobile para registrar e monitorar acidentes em obras, garantindo transparência na construção civil.</p>
+        <div class="project-footer">
+          <div class="tech-tags">
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">Expo</span>
+          </div>
+          <span class="project-link">Ver mais →</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section id="experiencia">
+  <div class="section-label">Experiência profissional</div>
+  <div class="experience-item">
+    <div class="exp-dot current">SS</div>
+    <div class="exp-content">
+      <h3>
+        Engenheiro de Dados, CRM e Automação
+        <span class="current-badge">atual</span>
+      </h3>
+      <div class="exp-company">ScanSource &nbsp;·&nbsp; Out/2025 – presente</div>
+      <div class="exp-desc">Atuação em engenharia de dados, gestão de CRM e automação de processos. Desenvolvimento de soluções para otimizar fluxos de dados e operações da empresa.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Gustavo Henrique Santana dos Santos</div>
+  <div class="footer-sub">Fatec Itaquera · DSM · 2023–2026 &nbsp;·&nbsp; <a href="https://github.com/Gusta-H" target="_blank" style="color:var(--muted);text-decoration:none;">github.com/Gusta-H</a></div>
+</footer>
+
+<!-- MODAIS -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div id="modal-semester" class="semester-tag"></div>
+        <h2 id="modal-title" style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-0.03em;margin-top:4px;"></h2>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="desc-block" id="modal-desc"></div>
+      <div class="modal-section-title">Tecnologias utilizadas</div>
+      <div id="modal-techs" class="tech-tags" style="gap:6px;"></div>
+      <div class="modal-section-title" id="modal-role-title">Minha atuação</div>
+      <div class="participation-box" id="modal-role"></div>
+      <div class="modal-section-title" id="modal-link-title" style="display:none;">Link do projeto</div>
+      <a class="modal-link" id="modal-link" href="#" target="_blank" style="display:none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        <span id="modal-link-text"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+const projects = {
+  p1: {
+    semester: '1º Semestre — Protótipo UX/UI',
+    title: 'Greenpeace',
+    desc: 'Desenvolvimento do protótipo de um site institucional para uma ONG com foco em sustentabilidade. O projeto tem como objetivo conectar pessoas à causa ambiental, promovendo ações educativas em escolas sobre temas como sustentabilidade, conservação da biodiversidade e proteção dos oceanos, reforçando a educação como agente de transformação social.',
+    techs: ['Figma', 'UX/UI', 'Prototipação'],
+    role: 'Junto ao meu time, criei o mockup do site institucional, definindo a estrutura visual e experiência do usuário para a plataforma da ONG.',
+    link: 'https://www.figma.com/design/Cg1l8qO0BGEUKXwMJDzrGL/Untitled?node-id=105-360&t=6c5QQmvM3CK8zrBo-1',
+    linkText: 'Abrir no Figma'
+  },
+  p2: {
+    semester: '2º Semestre — Desenvolvimento Front-end',
+    title: 'BookRoom',
+    desc: 'Sistema web para reserva de salas acadêmicas, desenvolvido para otimizar o processo de agendamento por professores. A plataforma permite consultar disponibilidade, realizar reservas e receber confirmações de forma rápida e intuitiva.',
+    techs: ['HTML', 'CSS', 'JavaScript', 'Figma', 'Bootstrap', 'Bulma'],
+    role: 'Responsável pela integração e interação com JavaScript, criação de protótipos no Figma e suporte com Bootstrap para componentização do layout.',
+    link: null,
+    linkText: null
+  },
+  p3: {
+    semester: '3º Semestre — Sistema Web Full Stack',
+    title: 'SRP — Sistema de Reservas para Paróquias',
+    desc: 'Desenvolvimento de um sistema web completo para gestão de viagens paroquiais, incluindo controle de ônibus, reservas de assentos e acompanhamento das viagens. A solução foi projetada com foco em usabilidade e organização operacional. Metodologia: Scrum.',
+    techs: ['React', 'JavaScript', 'Spring Boot', 'MongoDB'],
+    role: 'Desenvolvimento Front-end e Back-end, aplicação de conceitos de Programação Orientada a Objetos (POO) e criação do design da interface.',
+    link: 'https://github.com/Projeto-Interdisciplar-SRP',
+    linkText: 'Ver no GitHub'
+  },
+  p4: {
+    semester: '4º Semestre — E-commerce Integrado',
+    title: 'VivaTShirt',
+    desc: 'Desenvolvimento de um e-commerce para otimizar a gestão de pedidos de uma loja que operava via Instagram. A solução centraliza o controle das operações e integra com a API da Shopee, proporcionando mais eficiência e escalabilidade ao negócio.',
+    techs: ['Figma', 'HTML', 'CSS', 'JavaScript', 'Tailwind CSS', 'Node.js', 'MySQL'],
+    role: 'Criação do design (UX/UI), desenvolvimento Front-end e modelagem do banco de dados.',
+    link: 'https://github.com/VivaTShirt/platform',
+    linkText: 'Ver no GitHub'
+  },
+  p5: {
+    semester: '5º Semestre — Aplicativo Mobile',
+    title: 'TAFE — Monitoramento de Acidentes em Obras',
+    desc: 'Aplicativo mobile voltado à segurança do trabalho na construção civil, com o objetivo de registrar e monitorar acidentes. A solução contribui para garantir os direitos dos trabalhadores e aumentar a transparência entre colaboradores e empresas.',
+    techs: ['React Native', 'Expo'],
+    role: 'Desenvolvimento Front-end mobile, construindo as interfaces e fluxos de navegação do aplicativo.',
+    link: 'https://snack.expo.dev/@smilofc/tafe_correto?platform=android',
+    linkText: 'Abrir no Expo Snack'
+  }
+};
+
+function openModal(id) {
+  const p = projects[id];
+  document.getElementById('modal-semester').textContent = p.semester;
+  document.getElementById('modal-title').textContent = p.title;
+  document.getElementById('modal-desc').textContent = p.desc;
+  document.getElementById('modal-role').textContent = p.role;
+  const techsEl = document.getElementById('modal-techs');
+  techsEl.innerHTML = p.techs.map(t => `<span class="tech-tag" style="font-size:0.75rem;padding:4px 10px;">${t}</span>`).join('');
+  const linkEl = document.getElementById('modal-link');
+  const linkTitle = document.getElementById('modal-link-title');
+  if (p.link) {
+    linkEl.href = p.link;
+    document.getElementById('modal-link-text').textContent = p.linkText;
+    linkEl.style.display = 'inline-flex';
+    linkTitle.style.display = 'block';
+  } else {
+    linkEl.style.display = 'none';
+    linkTitle.style.display = 'none';
+  }
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
